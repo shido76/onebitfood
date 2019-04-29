@@ -1,0 +1,13 @@
+#crie a pasta do projeto e copie um Dockerfile, docker-compose.yml, Gemfile e Gemfile.lock(vazio)
+#rode esse cmd dentro da pasta para criar um novo projeto
+docker-compose run app rails new . --force --api --database=postgresql --skip-bundle
+
+#depois que rodar o comando acima, altere seu Gemfile e rode o comando:
+docker-compose build
+
+#executar este comando sempre que alterar o Gemfile
+docker run --rm -v "$PWD":/app -w /app ruby:2.5.1 bundle install
+
+#quando precisar usar um debugger
+docker-compose up -d
+docker attach onebitfood_app_1
