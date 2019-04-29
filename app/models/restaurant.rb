@@ -12,4 +12,12 @@ class Restaurant < ApplicationRecord
 
   enum status: { closed: 0, open: 1 }
 
+  geocoded_by :address
+ 
+  after_validation :geocode
+  
+  def address
+    [street, number, city, state].compact.join(', ')
+  end
+
 end
