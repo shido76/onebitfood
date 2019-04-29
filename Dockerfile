@@ -19,10 +19,13 @@ RUN mkdir -p $INSTALL_PATH
 WORKDIR $INSTALL_PATH
 
 # Copia o nosso Gemfile para dentro do container
-COPY Gemfile ./
+COPY Gemfile* /app/
 
 # Seta o path para as Gems
 ENV BUNDLE_PATH /gems
 
 # Copia nosso código para dentro do container
 COPY . .
+
+RUN bundle install
+
